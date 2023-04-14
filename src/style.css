@@ -36,14 +36,17 @@ html {
 }
 
 body.dark {
-  --light: #0c0c1e;
-  --grey: #060714;
+  /* --light: #0c0c1e; */
+  /* --grey: #060714; */
+  --light: #1e1f26;
+  --grey: #131418;
   --dark: #fbfbfb;
 }
 
 body {
   background: var(--grey);
   overflow-x: hidden;
+  transition: all 0.2s ease;
 }
 
 /* SIDEBAR */
@@ -85,8 +88,10 @@ body {
   box-sizing: content-box;
 }
 
-#sidebar .brand .bx {
+/* #sidebar .brand .bx, */
+#sidebar .brand .material-icons-round {
   min-width: 60px;
+  font-size: 2rem;
   display: flex;
   justify-content: center;
 }
@@ -140,7 +145,7 @@ body {
   display: flex;
   align-items: center;
   border-radius: 48px;
-  font-size: 16px;
+  font-size: 20px;
   color: var(--dark);
   white-space: nowrap;
   overflow-x: hidden;
@@ -155,15 +160,18 @@ body {
   transition: width 0.3s ease;
 }
 
-#sidebar .side-menu li a.logout {
+#sidebar .side-menu li a.logout:hover {
   color: var(--red);
+  transition: all 0.2s ease;
 }
 
 #sidebar .side-menu.top li a:hover {
   color: var(--blue);
+  transition: all 0.2s ease;
 }
 
-#sidebar .side-menu li a .bx {
+/* #sidebar .side-menu li a .bx, */
+#sidebar .side-menu li a .material-icons-round {
   min-width: calc(60px - ((4px + 6px) * 2));
   display: flex;
   justify-content: center;
@@ -235,7 +243,7 @@ body {
 }
 
 #content nav form .form-input {
-  display: flex;
+  display: none;
   align-items: center;
   height: 36px;
 }
