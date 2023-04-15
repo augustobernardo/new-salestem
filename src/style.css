@@ -405,17 +405,17 @@ body {
   grid-gap: 24px;
 }
 
-#content main .box-info li .bx {
-  width: 80px;
-  height: 80px;
+#content main .box-info li .bx-custom {
+  width: 60px;
+  height: 60px;
   border-radius: 10px;
-  font-size: 36px;
+  font-size: 26px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#content main .box-info li:nth-child(1) .bx {
+/* #content main .box-info li:nth-child(1) .bx {
   background: var(--light-blue);
   color: var(--blue);
 }
@@ -428,7 +428,7 @@ body {
 #content main .box-info li:nth-child(3) .bx {
   background: var(--light-orange);
   color: var(--orange);
-}
+} */
 
 #content main .box-info li .text h3 {
   font-size: 24px;
