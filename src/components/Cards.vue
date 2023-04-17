@@ -1,85 +1,28 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-import ApexCharts from "apexcharts";
-// import Chart from 'chart.js/auto';
-
-
-
-onMounted(() => {
-    var options = {
-        chart: {
-            height: 150,
-            width: 150,
-            type: 'radialBar',
-        },
-        series: [70],
-        plotOptions: {
-            radialBar: {
-                hollow: {
-                    margin: 15,
-                    size: "70%"
-                },
-
-                dataLabels: {
-                    showOn: "always",
-                    // name: {
-                    //     offsetY: -10,
-                    //     show: true,
-                    //     color: "#888",
-                    //     // fontSize: "13px"
-                    // },
-                    // value: {
-                    //     color: "#111",
-                    //     fontSize: "15px",
-                    //     show: true
-                    // }
-                },
-
-
-            }
-        },
-
-        stroke: {
-            lineCap: "round",
-        },
-        labels: ['Vendas'],
-
-    }
-
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-
-    chart.render();
-})
-
+import ChartComponent from "./ChartComponent.vue"
 </script>
-
 
 <template>
     <ul class="box-info">
         <li>
-            <!-- <i class='bx bxs-calendar-check'></i> -->
-            <div class="bx-custom ">
-                <div id="chart"></div>
-                <!-- <div class="canvas"></div> -->
-            </div>
+            <ChartComponent classChart="chart" percentage="70" />
             <span class="text">
                 <h3>1020</h3>
-                <p>Vendas</p>
-                <p>Mensais</p>
+                <p>Vendas Semanais</p>
             </span>
         </li>
         <li>
-            <i class='bx bxs-group'></i>
+            <ChartComponent classChart="chart2" percentage="100" />
             <span class="text">
                 <h3>2834</h3>
-                <p>Visitors</p>
+                <p>Vendas Mensais</p>
             </span>
         </li>
         <li>
-            <i class='bx bxs-dollar-circle'></i>
+            <ChartComponent classChart="chart3" percentage="10" />
             <span class="text">
                 <h3>$2543</h3>
-                <p>Total Sales</p>
+                <p>Vendas Diárias</p>
             </span>
         </li>
     </ul>

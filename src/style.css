@@ -29,6 +29,8 @@ li {
   --light-yellow: #fff2c6;
   --orange: #fd7238;
   --light-orange: #ffe0d3;
+
+  --chart-color: #342e37;
 }
 
 html {
@@ -41,6 +43,7 @@ body.dark {
   --light: #1e1f26;
   --grey: #131418;
   --dark: #fbfbfb;
+  --chart-color: #fbfbfb;
 }
 
 body {
@@ -414,8 +417,8 @@ body {
   justify-content: center;
   align-items: center;
 }
-
-/* #content main .box-info li:nth-child(1) .bx {
+/* 
+#content main .box-info li:nth-child(1) .bx {
   background: var(--light-blue);
   color: var(--blue);
 }
