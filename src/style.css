@@ -31,6 +31,11 @@ li {
   --light-orange: #ffe0d3;
 
   --chart-color: #342e37;
+  --chart-bg: #eeeeeeb0;
+
+  --chart-percentage-danger: #ff7675;
+  --chart-percentage-warning: #fdd142;
+  --chart-percentage-success: #00b894;
 }
 
 html {
@@ -38,12 +43,11 @@ html {
 }
 
 body.dark {
-  /* --light: #0c0c1e; */
-  /* --grey: #060714; */
   --light: #1e1f26;
   --grey: #131418;
   --dark: #fbfbfb;
   --chart-color: #fbfbfb;
+  --chart-bg: #2d2d33;
 }
 
 body {

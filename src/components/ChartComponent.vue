@@ -7,7 +7,22 @@ interface Props {
 }
 const props = defineProps<Props>();
 
+// const percentageColor = () => {
+//     const percent = parseInt(props.percentage);
+
+//     if (percent < 50) {
+//         return "#ff7675"
+//     } else if (percent < 80) {
+//         return "#fdcb6e"
+//     } else {
+//         return "#55efc4"
+//     }
+// }
+
+
 onMounted(() => {
+    // const fillColor = percentageColor();
+
     var options = {
         chart: {
             height: 150,
@@ -21,6 +36,11 @@ onMounted(() => {
                     margin: 16,
                     size: "60%",
                 },
+                track: {
+                    background: "var(--chart-bg)",
+                    strokeWidth: '100%',
+                    // margin: 16, // margin is in pixels
+                },
                 dataLabels: {
                     showOn: "always",
                     name: {
@@ -33,6 +53,9 @@ onMounted(() => {
                         show: false
                     }
                 },
+                // fill: {
+                //     colors: [fillColor]
+                // },
             }
         },
         stroke: {
