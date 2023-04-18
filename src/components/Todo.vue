@@ -5,11 +5,11 @@
 <template>
     <div class="todo">
         <div class="head">
-            <h3>Todos</h3>
-            <i class='bx bx-plus'></i>
-            <i class='bx bx-filter'></i>
+            <h3>Gráfico</h3>
+            <!-- <i class='bx bx-plus'></i>
+            <i class='bx bx-filter'></i> -->
         </div>
-        <ul class="todo-list">
+        <!-- <ul class="todo-list">
             <li class="completed">
                 <p>Todo List</p>
                 <i class='bx bx-dots-vertical-rounded'></i>
@@ -30,6 +30,6 @@
                 <p>Todo List</p>
                 <i class='bx bx-dots-vertical-rounded'></i>
             </li>
-        </ul>
+        </ul> -->
     </div>
 </template>

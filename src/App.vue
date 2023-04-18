@@ -40,18 +40,18 @@ const switchMode = () => {
     }
 
     if (document.body.classList.contains('dark')) {
-      localStorage.setItem('mode', 'dark');
+      localStorage.setItem('theme', 'dark');
     } else {
-      localStorage.setItem('mode', 'light');
+      localStorage.setItem('theme', 'light');
     }
   })
 }
 
 const verifyMode = () => {
   const switchMode = document.getElementById('switch-mode') as HTMLInputElement;
-  const getMode = localStorage.getItem('mode');
+  const getTheme = localStorage.getItem('theme');
 
-  if (getMode && getMode === 'dark') {
+  if (getTheme && getTheme === 'dark') {
     document.body.classList.add('dark');
     switchMode.checked = true;
   } else {
