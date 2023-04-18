@@ -38,10 +38,30 @@ const switchMode = () => {
     } else {
       document.body.classList.remove('dark');
     }
+
+    if (document.body.classList.contains('dark')) {
+      localStorage.setItem('mode', 'dark');
+    } else {
+      localStorage.setItem('mode', 'light');
+    }
   })
 }
 
+const verifyMode = () => {
+  const switchMode = document.getElementById('switch-mode') as HTMLInputElement;
+  const getMode = localStorage.getItem('mode');
+
+  if (getMode && getMode === 'dark') {
+    document.body.classList.add('dark');
+    switchMode.checked = true;
+  } else {
+    document.body.classList.remove('dark');
+    switchMode.checked = false;
+  }
+}
+
 onMounted(() => {
+  verifyMode();
 
   allSideMenu();
 
