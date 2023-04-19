@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Todo from './Todo.vue';
-import Profile from "../assets/img/people.png";
+import Profile from "../../assets/img/people.png";
 
 </script>
 

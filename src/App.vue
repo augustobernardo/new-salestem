@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import Sidebar from "./components/Sidebar.vue";
-import Navbar from "./components/Navbar.vue";
-import Main from "./components/Main.vue";
+import Sidebar from "./components/dashboard/Sidebar.vue";
+import Navbar from "./components/dashboard/Navbar.vue";
+import Main from "./components/dashboard/Main.vue";
+import Login from "./views/Login.vue";
 import { onMounted } from "vue";
 
 const allSideMenu = () => {
@@ -60,25 +61,49 @@ const verifyMode = () => {
   }
 }
 
+const checkLogin = () => {
+  const token = localStorage.getItem('token');
+
+  if (!token) { // if token is null
+    // window.location.href = '/';
+    localStorage.removeItem('token');
+    return false;
+  }
+
+  // window.location.href = '/dashboard';
+  localStorage.setItem('token', 'token');
+  return true;
+}
+
+const token = localStorage.getItem('token');
+
 onMounted(() => {
-  verifyMode();
 
-  allSideMenu();
-
-  menuBar();
-
-  switchMode();
+  // Se estiver logado
+  if (checkLogin()) {
+    verifyMode();
+    allSideMenu();
+    menuBar();
+    switchMode();
+  }
 })
+
 </script>
 
 <template>
-  <section id="sidebar">
-    <Sidebar />
-  </section>
-  <section id="content">
-    <Navbar />
-    <Main />
-  </section>
+  <div v-if="token !== 'token'">
+    <Login />
+  </div>
+
+  <div v-else>
+    <section id="sidebar">
+      <Sidebar />
+    </section>
+    <section id="content">
+      <Navbar />
+      <Main />
+    </section>
+  </div>
 </template>
 
 <style src="./style.css" />
