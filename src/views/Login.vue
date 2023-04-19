@@ -24,38 +24,36 @@ const inputsDetails = () => {
     })
 }
 
-let showFirst = 'show';
-
 const toggleFormsAnimation = () => {
     const toggleBtn = document.querySelectorAll('.toggle') as NodeListOf<HTMLElement>;
     const main = document.querySelector('main') as HTMLElement;
-    
-    showFirst = '';
-    
+
     toggleBtn.forEach(btn => {
         btn.addEventListener('click', () => {
             main.classList.toggle('sign-up-mode');
-
-            if (main.classList.contains('sign-up-mode')) {
-                image.value = RegisterImage;
-                altImage.value = 'Register';
-                idImage.value = 'registerImage';
-
-            } else {
-                image.value = LoginImage;
-                altImage.value = 'Login';
-                idImage.value = 'loginImage';
-
-            }
-            
+            changeImages();
         })
     })
+}
+
+const changeImages = () => {
+    const main = document.querySelector('main') as HTMLElement;
+
+    if (main.classList.contains('sign-up-mode')) {
+        image.value = RegisterImage;
+        altImage.value = 'Register';
+        idImage.value = 'registerImage';
+        return;
+    }
+    image.value = LoginImage;
+    altImage.value = 'Login';
+    idImage.value = 'loginImage';
+    return;
 }
 
 onMounted(() => {
     inputsDetails();
     toggleFormsAnimation();
-    // changeImages();
 })
 
 </script>
@@ -70,9 +68,7 @@ onMounted(() => {
                 </div>
                 <div class="carousel">
                     <div class="images-wrapper">
-                        <!-- Add a svg -->
-                        <img :src="image" :alt="altImage" :id="idImage" class="image show"/>
-                        <!-- <img :src="RegisterImage" alt="Register" class="image" /> -->
+                        <img :src="image" :alt="altImage" :id="idImage" class="image show" />
                     </div>
                 </div>
             </div>
