@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import IconComponent from "../IconComponent.vue";
 import { ToastifyClass } from "../../utils/scripts/ToastifyClass";
+// import { useAuth } from "../../store/authStore";
 
 const toastify = new ToastifyClass();
+
+// const { login } = useAuth();
 
 function checkForm() {
     const email = document.getElementById("email") as HTMLInputElement;
@@ -12,13 +15,14 @@ function checkForm() {
         toastify.error("Preencha todos os campos");
     } else {
         toastify.success("Login efetuado com sucesso");
+        // login(email.value, pass.value);
     }
 }
 </script>
 
 
 <template>
-    <form action="./Login.vue" autocomplete="off" class="sign-up-form">
+    <form action="/home" autocomplete="off" class="sign-up-form">
 
         <div class="logo">
             <IconComponent iconName="store" />

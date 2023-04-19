@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import IconComponent from "../IconComponent.vue";
 import { ToastifyClass } from "../../utils/scripts/ToastifyClass";
+import router from "../../router";
+import { useAuth } from "../../store/authStore";
 
 const toastify = new ToastifyClass();
+const { login } = useAuth();
 
 function checkForm() {
     const email = document.getElementById("email") as HTMLInputElement;
@@ -12,14 +15,19 @@ function checkForm() {
         toastify.error("Preencha todos os campos");
     } else {
         toastify.success("Login efetuado com sucesso");
+        
+        // set the token in pinia store
+        login(email.value, pass.value);
+
+        router.push("/home");
+
     }
 }
-
 </script>
 
 
 <template>
-    <form action="./Login.vue" autocomplete="off" class="sign-in-form">
+    <form action="#" autocomplete="off" class="sign-in-form">
 
         <div class="logo">
             <IconComponent iconName="store" />

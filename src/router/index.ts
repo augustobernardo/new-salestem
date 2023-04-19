@@ -5,6 +5,10 @@ const routes = [
     path: "/home",
     name: "Home",
     component: () => import("../views/HomeView.vue"),
+    meta: {
+      guest: true,
+      requiresAuth: true,
+    },
   },
   {
     path: "/login",
