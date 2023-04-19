@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
 import FormSignIn from '../components/login/FormSignIn.vue';
 import FormSignUp from '../components/login/FormSignUp.vue';
 import LoginImage from '../assets/login.svg';
 import RegisterImage from '../assets/register.svg';
-import { onMounted, ref } from "vue";
 
 const image = ref(LoginImage);
 const altImage = ref('Login');
@@ -54,6 +54,7 @@ const changeImages = () => {
 onMounted(() => {
     inputsDetails();
     toggleFormsAnimation();
+    changeImages();
 })
 
 </script>
@@ -68,7 +69,7 @@ onMounted(() => {
                 </div>
                 <div class="carousel">
                     <div class="images-wrapper">
-                        <img :src="image" :alt="altImage" :id="idImage" class="image show" />
+                        <img :src="image" :alt="altImage" :id="idImage" class="image"/>
                     </div>
                 </div>
             </div>
@@ -76,4 +77,4 @@ onMounted(() => {
     </main>
 </template>
 
-<style src="../styles/login.css" />
+<style src="../styles/login.css"/>

@@ -1,5 +1,20 @@
 <script setup lang="ts">
 import IconComponent from "../IconComponent.vue";
+import { ToastifyClass } from "../../utils/scripts/ToastifyClass";
+
+const toastify = new ToastifyClass();
+
+function checkForm() {
+    const email = document.getElementById("email") as HTMLInputElement;
+    const pass = document.getElementById("pass") as HTMLInputElement;
+
+    if (email.value == "" || pass.value == "") {
+        toastify.error("Preencha todos os campos");
+    } else {
+        toastify.success("Login efetuado com sucesso");
+    }
+}
+
 </script>
 
 
@@ -27,7 +42,7 @@ import IconComponent from "../IconComponent.vue";
                 <label for="pass" class="input-label">Senha</label>
             </div>
 
-            <input type="submit" value="Entrar" class="sign-btn">
+            <input type="submit" v-on:click="checkForm()" value="Entrar" class="sign-btn">
 
             <p class="text">
                 Esqueceu sua senha?
