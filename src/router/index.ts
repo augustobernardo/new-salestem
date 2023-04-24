@@ -4,12 +4,13 @@ const routes = [
   {
     path: "/home",
     name: "Home",
-    component: () => import("../views/HomeView.vue"),
+    // webpackChunkName: "home" will be loaded in a separate chunk
+    component: () => import(/* webpackChunkName: "home" */ "../views/HomeView.vue"),
   },
   {
     path: "/login",
     name: "Login",
-    component: () => import("../views/LoginView.vue"),
+    component: () => import(/* webpackChunkName: "login" */ "../views/LoginView.vue"),
   },
 ];
 
