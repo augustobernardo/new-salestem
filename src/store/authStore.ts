@@ -30,14 +30,19 @@ export const useAuth = defineStore('auth', () => {
         userParams.password.value = null;
         // token.value = null;
 
+
+    }
+
+    function clearUserData() {
         localStorage.removeItem('email');
         localStorage.removeItem('password');
-        localStorage.removeItem('token');
+        // localStorage.removeItem('token');
     }
 
     return {
         // token,
         login,
-        logout
+        logout,
+        clearUserData,
     }
 });

@@ -14,13 +14,12 @@ function checkForm() {
     if (email.value == "" || pass.value == "") {
         toastify.error("Preencha todos os campos");
     } else {
-        toastify.success("Login efetuado com sucesso");
+        toastify.success("Login realizado com sucesso");
         
         // set the token in pinia store
         login(email.value, pass.value);
 
         router.push("/home");
-
     }
 }
 </script>

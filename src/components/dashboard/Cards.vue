@@ -1,28 +1,20 @@
 <script setup lang="ts">
+import { useCard } from "../../store/cardStore";
 import ChartComponent from "./ChartComponent.vue"
+
+const cardStore = useCard();
+const cardData = cardStore.cardData;
+
+// localStorage.setItem("cardData", JSON.stringify(cardData));
 </script>
 
 <template>
     <ul class="box-info">
-        <li>
-            <ChartComponent classChart="chart3" percentage="10" />
+        <li v-for="(card, index) in cardData" :key="index">
+            <ChartComponent :classChart="card.class" :percentage="card.percentage" />
             <span class="text">
-                <h3>R$ 2543,47</h3>
-                <p>Vendas de hoje</p>
-            </span>
-        </li>
-        <li>
-            <ChartComponent classChart="chart" percentage="70" />
-            <span class="text">
-                <h3>R$ 1020.90</h3>
-                <p>Vendas da última semana</p>
-            </span>
-        </li>
-        <li>
-            <ChartComponent classChart="chart2" percentage="100" />
-            <span class="text">
-                <h3>R$ 2834,00</h3>
-                <p>Vendas do último mês</p>
+                <h3>{{ card.value }}</h3>
+                <p>{{ card.label }}</p>
             </span>
         </li>
     </ul>

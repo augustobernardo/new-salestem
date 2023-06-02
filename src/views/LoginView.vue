@@ -4,10 +4,12 @@ import FormSignIn from '../components/login/FormSignIn.vue';
 import FormSignUp from '../components/login/FormSignUp.vue';
 import LoginImage from '../assets/login.svg';
 import RegisterImage from '../assets/register.svg';
+import { useAuth } from "../store/authStore";
 
 const image = ref(LoginImage);
 const altImage = ref('Login');
 const idImage = ref('loginImage');
+const { clearUserData } = useAuth();
 
 const inputsDetails = () => {
     const inputs = document.querySelectorAll('.input-field');
@@ -52,11 +54,11 @@ const changeImages = () => {
 }
 
 onMounted(() => {
+    clearUserData();
     inputsDetails();
     toggleFormsAnimation();
     changeImages();
 })
-
 </script>
 
 <template>

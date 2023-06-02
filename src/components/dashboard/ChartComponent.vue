@@ -7,23 +7,23 @@ interface Props {
 }
 const props = defineProps<Props>();
 
-// const percentageColor = () => {
-//     const percent = parseInt(props.percentage);
+const percentageColor = () => {
+    const percent = parseInt(props.percentage);
 
-//     if (percent < 50) {
-//         return "#ff7675"
-//     } else if (percent < 80) {
-//         return "#fdcb6e"
-//     } else {
-//         return "#55efc4"
-//     }
-// }
-
+    if (percent < 50) {
+        return "#ff7675"
+    } else if (percent < 80) {
+        return "#fdcb6e"
+    } else {
+        return "#55efc4"
+    }
+}
 
 onMounted(() => {
-    // const fillColor = percentageColor();
+    const fillColor = percentageColor();
 
     var options = {
+        colors: [fillColor],
         chart: {
             height: 150,
             width: 150,
@@ -53,16 +53,13 @@ onMounted(() => {
                         show: false
                     }
                 },
-                // fill: {
-                //     colors: [fillColor]
-                // },
             }
         },
         stroke: {
             lineCap: "round",
 
         },
-        labels: [props.percentage + "%"],
+        labels: [props.percentage + "%" ],
     }
     var chart = new ApexCharts(document.querySelector(`#${props.classChart}`), options);
     chart.render();

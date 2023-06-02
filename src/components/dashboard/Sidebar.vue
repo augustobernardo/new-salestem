@@ -7,7 +7,6 @@ const { logout } = useAuth();
 function userLogout() {
 	logout();
 }
-
 </script>
 
 <template>
@@ -30,7 +29,7 @@ function userLogout() {
 		</li>
 		<li>
 			<a href="#">
-				<ItemComponent iconName="inbox" />
+				<IconComponent iconName="inbox" />
 				<span class="text">Meus Produtos</span>
 			</a>
 		</li>

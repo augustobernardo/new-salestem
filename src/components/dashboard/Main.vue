@@ -5,10 +5,10 @@ import Cards from './Cards.vue';
 
 <template>
     <main>
-    <div class="head-title">
-        <div class="left">
-            <h1>Dashboard</h1>
-            <!-- <ul class="breadcrumb">
+        <div class="head-title">
+            <div class="left">
+                <h1>Dashboard</h1>
+                <!-- <ul class="breadcrumb">
                     <li>
                         <a href="#">Dashboard</a>
                     </li>
@@ -25,7 +25,7 @@ import Cards from './Cards.vue';
             <!-- <a href="#" class="btn-download">
                         <i class='bx bxs-cloud-download'></i>
                         <span class="text">Download PDF</span>
-                    </a> -->
+            </a> -->
         </div>
 
         <Cards />
