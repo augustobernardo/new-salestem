@@ -31,7 +31,7 @@ export default defineConfig({
             purpose: "any maskable",
           },
         ],
-        start_url: "/login",
+        start_url: "/",
         display: "standalone",
         background_color: "#ffffff",
       },
