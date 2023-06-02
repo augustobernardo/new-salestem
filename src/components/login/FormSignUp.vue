@@ -50,11 +50,6 @@ function checkForm() {
             </div>
 
             <input type="submit" v-on:click="checkForm()" value="Entrar" class="sign-btn">
-
-            <p class="text">
-                Esqueceu sua senha?
-                <a href="#">Clique aqui</a>
-            </p>
         </div>
     </form>
 </template>
