@@ -44,7 +44,6 @@ export const useAuth = defineStore("auth", () => {
 
     function generateToken() {
         setToken(Math.random().toString(36).substr(2));
-        localStorage.setItem("token", getToken() as string);
     }
 
     function register(emailParam: string, passParam: string, username: string) {
@@ -53,17 +52,13 @@ export const useAuth = defineStore("auth", () => {
             setPassword(passParam);
             setUsername(username);
             generateToken();
-
-            localStorage.setItem("email", getEmail() as string);
         }
     }
 
     function login(emailParam: string, passParam: string) {
         if (emailParam && passParam) {
             setEmail(emailParam);
-            setPassword(passParam);
-
-            localStorage.setItem("email", getEmail() as string);
+            setPassword(passParam)
             generateToken();
         }
     }
