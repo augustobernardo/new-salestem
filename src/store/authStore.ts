@@ -88,6 +88,5 @@ export const useAuth = defineStore("auth", () => {
         setToken,
         setEmail,
         setPassword,
-        getUsername,
     };
 });

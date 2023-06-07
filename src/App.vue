@@ -15,6 +15,7 @@ import Login from "./views/LoginView.vue";
     <HomeView />
   </div> -->
   <RouterView />
+  
 </template>
 
 
