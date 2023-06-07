@@ -15,11 +15,6 @@ function checkForm() {
         toastify.error("Preencha todos os campos");
     } else {
         toastify.success("Login efetuado com sucesso");
-
-        localStorage.setItem("username", username.value);
-        localStorage.setItem("email", email.value);
-        localStorage.setItem("pass", pass.value);
-
         register(email.value, pass.value, username.value);
     }
 }
