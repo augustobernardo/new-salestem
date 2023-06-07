@@ -14,7 +14,7 @@ import Login from "./views/LoginView.vue";
   <div v-else>
     <HomeView />
   </div> -->
-  <RouterView />
+  <router-view />
 </template>
 
 
