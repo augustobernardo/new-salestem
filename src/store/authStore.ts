@@ -1,48 +1,97 @@
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { defineStore } from "pinia";
+import { ref } from "vue";
 
-export const useAuth = defineStore('auth', () => {
-
-    const token = ref<string | null>(localStorage.getItem('token'));
+export const useAuth = defineStore("auth", () => {
+    const token = ref<string | null>(localStorage.getItem("token"));
+    
     const userParams = {
         email: ref<string | null>(null),
-        password: ref<string | null>(null)
+        password: ref<string | null>(null),
+        setUsername: ref<string | null>(null),
     };
 
-    function generateToken() {
-        token.value = Math.random().toString(36).substr(2);
+    function getToken() {
+        return token.value;
+    }
 
-        localStorage.setItem('token', token.value.toString());
+    function getEmail() {
+        return userParams.email.value;
+    }
+
+    function getPassword() {
+        return userParams.password.value;
+    }
+
+    function getUsername() {
+        return userParams.setUsername.value;
+    }
+
+    function setToken(tokenParam: string) {
+        token.value = tokenParam;
+    }
+
+    function setEmail(emailParam: string) {
+        userParams.email.value = emailParam;
+    }
+
+    function setPassword(passParam: string) {
+        userParams.password.value = passParam;
+    }
+
+    function setUsername(username: string) {
+        userParams.setUsername.value = username;   
+    }
+
+    function generateToken() {
+        setToken(Math.random().toString(36).substr(2));
+        localStorage.setItem("token", getToken() as string);
+    }
+
+    function register(emailParam: string, passParam: string, username: string) {
+        if (emailParam && passParam && username) {
+            setEmail(emailParam);
+            setPassword(passParam);
+            setUsername(username);
+            generateToken();
+
+            localStorage.setItem("email", getEmail() as string);
+        }
     }
 
     function login(emailParam: string, passParam: string) {
-        userParams.email.value = emailParam;
-        userParams.password.value = passParam;
+        if (emailParam && passParam) {
+            setEmail(emailParam);
+            setPassword(passParam);
 
-        localStorage.setItem('email', userParams.email.value);
-        localStorage.setItem('password', userParams.password.value);
-
-        generateToken();
+            localStorage.setItem("email", getEmail() as string);
+            generateToken();
+        }
     }
-        
+
     function logout() {
-        userParams.email.value = null;
-        userParams.password.value = null;
-        // token.value = null;
-
-
+        setEmail("");
+        setPassword("");
+        setUsername("");
+        setToken("");
     }
 
     function clearUserData() {
-        localStorage.removeItem('email');
-        localStorage.removeItem('password');
-        // localStorage.removeItem('token');
+        localStorage.removeItem("email");
+        localStorage.removeItem("password");
+        localStorage.removeItem("token");
     }
 
     return {
-        // token,
+        getToken,
         login,
+        register,
         logout,
         clearUserData,
-    }
+        generateToken,
+        getEmail,
+        getPassword,
+        setToken,
+        setEmail,
+        setPassword,
+    };
 });

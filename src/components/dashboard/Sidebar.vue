@@ -48,7 +48,7 @@ function userLogout() {
 	</ul>
 	<ul class="side-menu">
 		<li>
-			<a href="/login" v-on:click="userLogout()" class="logout">
+			<a href="/" v-on:click="userLogout()" class="logout">
 				<IconComponent iconName="logout" />
 				<span class="text">Logout</span>
 			</a>
