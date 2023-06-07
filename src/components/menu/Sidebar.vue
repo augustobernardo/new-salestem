@@ -10,16 +10,17 @@ function userLogout() {
 </script>
 
 <template>
-	<a href="#" class="brand">
+	<RouterLink to="/home" class="brand">
 		<IconComponent iconName="store" />
 		<span class="text">SALESTEM</span>
-	</a>
+	</RouterLink>
+
 	<ul class="side-menu top">
 		<li class="active">
-			<a href="#">
+			<RouterLink to="/home">
 				<IconComponent iconName="dashboard" />
 				<span class="text">Dashboard</span>
-			</a>
+			</RouterLink>
 		</li>
 		<li>
 			<a href="#">
@@ -30,19 +31,13 @@ function userLogout() {
 		<li>
 			<a href="#">
 				<IconComponent iconName="inbox" />
-				<span class="text">Meus Produtos</span>
+				<span class="text">Produtos</span>
 			</a>
 		</li>
 		<li>
 			<a href="#">
 				<IconComponent iconName="people" />
 				<span class="text">Clientes</span>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<IconComponent iconName="donut_large" />
-				<span class="text">Gráficos</span>
 			</a>
 		</li>
 	</ul>
