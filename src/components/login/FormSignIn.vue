@@ -23,7 +23,7 @@ function checkForm() {
 
 
 <template>
-    <form action="/home" autocomplete="off" class="sign-in-form">
+    <form action="/dashboard" autocomplete="off" class="sign-in-form">
 
         <div class="logo">
             <IconComponent iconName="store" />

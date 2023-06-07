@@ -27,7 +27,7 @@ function checkForm() {
 
 
 <template>
-    <form action="/home" autocomplete="off" class="sign-up-form">
+    <form action="/dashboard" autocomplete="off" class="sign-up-form">
 
         <div class="logo">
             <IconComponent iconName="store" />

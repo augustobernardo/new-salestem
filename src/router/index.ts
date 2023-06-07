@@ -4,13 +4,27 @@ const routes = [
   {
     path: "/",
     name: "Login",
-    component: () => import(/* webpackChunkName: "login" */ "../views/LoginView.vue"),
+    component: () => import("../views/LoginView.vue"),
   },
   {
-    path: "/home",
-    name: "Home",
-    // webpackChunkName: "home" will be loaded in a separate chunk
-    component: () => import(/* webpackChunkName: "home" */ "../views/HomeView.vue"),
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import("../views/DashboardHomeView.vue"),
+  },
+  {
+    path: "/vendas",
+    name: "Venda",
+    component: () => import("../views/VendasView.vue"),
+  },
+  {
+    path: "/produtos",
+    name: "Produto",
+    component: () => import( "../views/ProdutosView.vue"),
+  },
+  {
+    path: "/clientes",
+    name: "Cliente",
+    component: () => import( "../views/ClientesView.vue"),
   },
 ];
 

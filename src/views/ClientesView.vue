@@ -2,8 +2,8 @@
 import HomeController from '../utils/scripts/HomeController';
 import Sidebar from "../components/menu/Sidebar.vue";
 import Navbar from "../components/menu/Navbar.vue";
-import Main from "../components/dashboard/Main.vue";
 import { onMounted } from "vue";
+import ClientesMain from '../components/clientes/ClientesMain.vue';
 
 const homeController = new HomeController();
 
@@ -18,11 +18,13 @@ onMounted(() => {
 
 <template>
     <section id="sidebar">
-        <Sidebar />
+        <Sidebar :activeMenu="4" />
     </section>
     <section id="content">
         <Navbar />
-        <Main />
+        
+        <ClientesMain/>
+
     </section>
 </template>
 

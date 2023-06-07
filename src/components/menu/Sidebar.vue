@@ -10,37 +10,23 @@ function userLogout() {
 </script>
 
 <template>
-	<RouterLink to="/home" class="brand">
+	<RouterLink to="/dashboard" class="brand">
 		<IconComponent iconName="store" />
 		<span class="text">SALESTEM</span>
 	</RouterLink>
 
 	<ul class="side-menu top">
-		<li class="active">
-			<RouterLink to="/home">
-				<IconComponent iconName="dashboard" />
-				<span class="text">Dashboard</span>
-			</RouterLink>
-		</li>
-		<li>
-			<a href="#">
-				<IconComponent iconName="receipt_long" />
-				<span class="text">Vendas</span>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<IconComponent iconName="inbox" />
-				<span class="text">Produtos</span>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<IconComponent iconName="people" />
-				<span class="text">Clientes</span>
-			</a>
+		<li v-for="item in menuItems" :key="item.id" :class="{ active: activeMenu === item.id }">
+			<Router-link :to="`/${item.name.toLowerCase()}`">
+				<IconComponent v-if="item.name == 'Dashboard'" iconName="dashboard" />
+				<IconComponent v-if="item.name == 'Vendas'" iconName="receipt_long" />
+				<IconComponent v-if="item.name == 'Produtos'" iconName="inbox" />
+				<IconComponent v-if="item.name == 'Clientes'" iconName="people" />
+				<span class="text">{{ item.name }}</span>
+			</Router-link>
 		</li>
 	</ul>
+
 	<ul class="side-menu">
 		<li>
 			<a href="/" v-on:click="userLogout()" class="logout">
@@ -50,3 +36,32 @@ function userLogout() {
 		</li>
 	</ul>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { RouteRecordRaw } from 'vue-router';
+
+export default defineComponent({
+  props: {
+    activeMenu: {
+      type: Number,
+      default: 0
+    }
+  },
+  data() {
+    return {
+      menuItems: [
+        { id: 1, name: 'Dashboard' },
+        { id: 2, name: 'Vendas' },
+        { id: 3, name: 'Produtos' },
+        { id: 4, name: 'Clientes' }
+      ] as MenuItem[]
+    };
+  }
+});
+
+interface MenuItem {
+  id: number;
+  name: string;
+}
+</script>
