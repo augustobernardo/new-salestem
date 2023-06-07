@@ -13,9 +13,7 @@ function checkForm() {
     if (email.value == "" || pass.value == "") {
         toastify.error("Preencha todos os campos");
     } else {
-        toastify.success("Login realizado com sucesso");
-        
-        // set the token in pinia store
+        toastify.success("Login realizado com sucesso")
         login(email.value, pass.value);
     }
 }
