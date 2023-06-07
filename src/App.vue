@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HomeView from "./views/DashboardHomeView.vue";
+import HomeView from "./views/HomeView.vue";
 import Login from "./views/LoginView.vue";
 
 
@@ -14,8 +14,7 @@ import Login from "./views/LoginView.vue";
   <div v-else>
     <HomeView />
   </div> -->
-  <RouterView />
-  
+  <router-view />
 </template>
 
 
