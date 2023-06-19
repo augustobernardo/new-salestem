@@ -16,20 +16,12 @@ function userLogout() {
 	</a>
 	<ul class="side-menu top">
 		<li class="active">
-			<!-- <a href="#">
-				<IconComponent iconName="dashboard" />
-				<span class="text">Dashboard</span>
-			</a> -->
 			<router-link to="/dashboard">
 				<IconComponent iconName="dashboard" />
 				<span class="text">Dashboard</span>
 			</router-link>
 		</li>
 		<li>
-			<!-- <a href="#">
-				<IconComponent iconName="receipt_long" />
-				<span class="text">Vendas</span>
-			</a> -->
 			<router-link to="/sales">
 				<IconComponent iconName="receipt_long" />
 				<span class="text">Vendas</span>

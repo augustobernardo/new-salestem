@@ -1,9 +1,19 @@
 <script setup lang="ts">
 import Todo from './Todo.vue';
-import Profile from "../../assets/img/people.png";
 
+interface Items {
+    id: number;
+    name: string;
+    date: string;
+}
+
+const menuItems: Items[] = [
+    { id: 1, name: 'John Doe', date: '01-10-2021' },
+    { id: 2, name: 'John Doe', date: '01-10-2021' },
+    { id: 3, name: 'John Doe', date: '01-10-2021' },
+    { id: 4, name: 'John Doe', date: '01-10-2021' }
+];
 </script>
-
 
 <template>
     <div class="table-data">
@@ -18,49 +28,15 @@ import Profile from "../../assets/img/people.png";
                     <tr>
                         <th>User</th>
                         <th>Date Order</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    <tr>
+                    <tr v-for="item in menuItems" :key="item.id">
                         <td>
-                            <img :src="Profile">
-                            <p>John Doe</p>
+                            <p>{{ item.name }}</p>
                         </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status completed">Completed</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img :src="Profile">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img :src="Profile">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status process">Process</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img :src="Profile">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img :src="Profile">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status completed">Completed</span></td>
+                        <td>{{ item.date  }}</td>
                     </tr>
                 </tbody>
             </table>

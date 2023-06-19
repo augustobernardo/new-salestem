@@ -5,7 +5,6 @@ import ChartComponent from "./ChartComponent.vue"
 const cardStore = useCard();
 const cardData = cardStore.cardData;
 
-// localStorage.setItem("cardData", JSON.stringify(cardData));
 </script>
 
 <template>
