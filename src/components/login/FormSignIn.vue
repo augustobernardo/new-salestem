@@ -2,7 +2,6 @@
 import IconComponent from "../IconComponent.vue";
 import { ToastifyClass } from "../../utils/scripts/ToastifyClass";
 import { useAuth } from "../../store/authStore";
-import { useRouter } from "vue-router";
 
 const toastify = new ToastifyClass();
 const { login } = useAuth();
@@ -15,6 +14,8 @@ function checkForm() {
         toastify.error("Preencha todos os campos");
     } else {
         toastify.success("Login realizado com sucesso");
+        
+        // set the token in pinia store
         login(email.value, pass.value);
     }
 }
@@ -22,7 +23,7 @@ function checkForm() {
 
 
 <template>
-    <form autocomplete="off" class="sign-in-form">
+    <form action="/dashboard" autocomplete="off" class="sign-in-form">
 
         <div class="logo">
             <IconComponent iconName="store" />
@@ -46,11 +47,6 @@ function checkForm() {
             </div>
 
             <input type="submit" v-on:click="checkForm()" value="Entrar" class="sign-btn">
-
-            <p class="text">
-                Já tem uma conta?
-                <a href="#">Clique aqui</a>
-            </p>
         </div>
     </form>
 </template>
