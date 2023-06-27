@@ -22,8 +22,8 @@ onMounted(() => {
     </section>
     <section id="content">
         <Navbar />
-        
-        <VendasMain/>
+
+        <VendasMain />
 
     </section>
 </template>
