@@ -5,7 +5,7 @@
     <main>
         <div class="head-title">
             <div class="left">
-                <h1>Vendas</h1>
+                <h1>Clientes</h1>
                 
             </div>
 

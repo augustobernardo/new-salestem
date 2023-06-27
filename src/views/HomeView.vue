@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import HomeController from '../utils/scripts/HomeController';
-import Sidebar from "../components/menu/Sidebar.vue";
-import Navbar from "../components/menu/Navbar.vue";
+import HomeController from '../utils/scripts/HomeController'
+import HeaderComponent from '../components/dashboard/HeaderComponent.vue';
 import { onMounted } from "vue";
-import ProdutosMain from '../components/produtos/ProdutosMain.vue';
 
 const homeController = new HomeController();
 
@@ -18,13 +16,11 @@ onMounted(() => {
 
 <template>
     <section id="sidebar">
-        <Sidebar :activeMenu="3" />
+        <HeaderComponent :section="true"/>
     </section>
     <section id="content">
-        <Navbar />
-
-        <ProdutosMain />
-
+        <HeaderComponent :section="false"/>
+        <router-view />
     </section>
 </template>
 
