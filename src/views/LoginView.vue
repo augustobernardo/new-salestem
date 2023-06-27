@@ -71,7 +71,7 @@ onMounted(() => {
                 </div>
                 <div class="carousel">
                     <div class="images-wrapper">
-                        <img :src="image" :alt="altImage" :id="idImage" class="image" />
+                        <img :src="image" :alt="altImage" :id="idImage" class="image"/>
                     </div>
                 </div>
             </div>

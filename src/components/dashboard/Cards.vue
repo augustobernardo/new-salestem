@@ -1,22 +1,11 @@
 <script setup lang="ts">
 import { useCard } from "../../store/cardStore";
 import ChartComponent from "./ChartComponent.vue"
-import { onMounted } from "vue";
-import { gsap } from "gsap";
 
 const cardStore = useCard();
 const cardData = cardStore.cardData;
 
-onMounted(() => {
-    gsap.from(".box-info li", {
-        duration: 0.8,
-        y: 25,
-        opacity: 0,
-        stagger: 0.2,
-        ease: "ease-in-out",
-    });
-});
-
+// localStorage.setItem("cardData", JSON.stringify(cardData));
 </script>
 
 <template>
