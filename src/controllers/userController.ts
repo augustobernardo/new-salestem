@@ -15,7 +15,7 @@ const UserController = {
                 })
             })
         } catch (error) {
-            toastify.error('Erro ao buscar usuários')
+            toastify.error('Não há usuários registrados')
         }
     },
 

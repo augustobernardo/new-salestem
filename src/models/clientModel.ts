@@ -6,4 +6,4 @@ interface ClientModel {
     cpf: string
 }
 
-export default ClientModel
+export default ClientModel;

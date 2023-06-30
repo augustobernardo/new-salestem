@@ -5,4 +5,4 @@ interface UserModel {
     password: string;
 }
 
-export default UserModel
+export default UserModel;

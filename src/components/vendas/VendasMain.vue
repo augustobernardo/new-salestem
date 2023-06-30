@@ -58,7 +58,7 @@
   
 <script lang="ts">
 import { defineComponent } from 'vue';
-import jsonData from './VendaData.json'; // Importar o arquivo JSON com os dados
+ // Importar o arquivo JSON com os dados
 
 export default defineComponent({
   data() {
@@ -83,6 +83,9 @@ export default defineComponent({
     },
   },
   created() {
+
+    
+
     const dadosLocalStorage = localStorage.getItem('tabelaDadosVendas');
     if (dadosLocalStorage) {
       this.items = JSON.parse(dadosLocalStorage);
