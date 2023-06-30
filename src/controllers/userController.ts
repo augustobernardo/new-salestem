@@ -1,6 +1,5 @@
-import axios from 'axios';
 import apiService from '../services/apiService';
-import UserModel from '../model/userModel';
+import UserModel from '../models/userModel';
 import { ToastifyClass } from "../utils/scripts/ToastifyClass";
 
 const toastify = new ToastifyClass()
@@ -11,22 +10,22 @@ const UserController = {
             await apiService.get<UserModel[]>('users').then((users) => {
                 users.map((user) => {
                     if (user.email == emailParam && user.password) {
-                        toastify.success('Login realizado com sucesso')
                         window.location.href = '/dashboard';
                     }
                 })
             })
         } catch (error) {
-            throw new Error('Erro ao buscar usuários');
+            toastify.error('Erro ao buscar usuários')
         }
     },
 
     async postUser(user: UserModel) {
         try {
-            toastify.success('Registrado com sucesso')
             await apiService.post<UserModel>('users', user);
+            toastify.success('Registrado com sucesso')
         } catch (error) {
-            throw new Error('Erro ao criar usuário');
+            toastify.error('Erro ao registrar')
+            console.log(error)
         }
     }
 };

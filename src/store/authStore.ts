@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { ToastifyClass } from "../utils/scripts/ToastifyClass";
 import UserController from "../controllers/userController";
-import UserModel from '../model/userModel'
+import UserModel from '../models/userModel'
 
 
 export const useAuth = defineStore("auth", () => {
