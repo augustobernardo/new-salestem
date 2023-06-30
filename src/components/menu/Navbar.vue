@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Profile from "../../assets/img/people.png";
 </script>
 
 <template>
@@ -17,9 +16,6 @@ import Profile from "../../assets/img/people.png";
 
 		<input type="checkbox" id="switch-mode" hidden>
 		<label for="switch-mode" class="switch-mode"></label>
-		<a href="#" class="profile">
-			<img :src="Profile">
-		</a>
 	</nav>
 </template>
 

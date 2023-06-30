@@ -39,7 +39,6 @@ function userLogout() {
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { RouteRecordRaw } from 'vue-router';
 
 export default defineComponent({
   props: {

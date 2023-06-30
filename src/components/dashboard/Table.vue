@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Todo from './Todo.vue';
-import Profile from "../../assets/img/people.png";
 
 </script>
 
@@ -16,51 +15,42 @@ import Profile from "../../assets/img/people.png";
             <table>
                 <thead>
                     <tr>
-                        <th>User</th>
-                        <th>Date Order</th>
-                        <th>Status</th>
+                        <th>Cliente</th>
+                        <th>Data da Compra</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>
-                            <img :src="Profile">
                             <p>John Doe</p>
                         </td>
                         <td>01-10-2021</td>
-                        <td><span class="status completed">Completed</span></td>
+                       
                     </tr>
                     <tr>
                         <td>
-                            <img :src="Profile">
                             <p>John Doe</p>
                         </td>
                         <td>01-10-2021</td>
-                        <td><span class="status pending">Pending</span></td>
                     </tr>
                     <tr>
                         <td>
-                            <img :src="Profile">
                             <p>John Doe</p>
                         </td>
                         <td>01-10-2021</td>
-                        <td><span class="status process">Process</span></td>
                     </tr>
                     <tr>
                         <td>
-                            <img :src="Profile">
                             <p>John Doe</p>
                         </td>
                         <td>01-10-2021</td>
-                        <td><span class="status pending">Pending</span></td>
                     </tr>
                     <tr>
                         <td>
-                            <img :src="Profile">
                             <p>John Doe</p>
                         </td>
                         <td>01-10-2021</td>
-                        <td><span class="status completed">Completed</span></td>
                     </tr>
                 </tbody>
             </table>
