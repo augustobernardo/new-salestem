@@ -15,13 +15,12 @@
             <th>Quantidade</th>
             <th>Total</th>
             <th>Data da Venda</th>
-            <th v-if="!dashboard">Edição</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(item, index) in items" :key="index" >
             <td>
-              <input v-model="item.client.name" :disabled="!item.editing" class="input-field" />
+              <input v-model="item.client.name" :disabled="true" class="input-field" />
             </td>
             <td>
               <input v-model="item.product.nameProd" :disabled="!item.editing" class="input-field" />
@@ -30,15 +29,13 @@
               <input v-model="item.amount" :disabled="!item.editing" class="input-field" />
             </td>
             <td>
-              <input v-model="item.totalPrice" :disabled="!item.editing" class="input-field" />
+              <input v-model="item.totalPrice" :disabled="true" class="input-field" />
             </td>
             <td>
               <input v-model="item.saleDate" :disabled="!item.editing" class="input-field" />
             </td>
             <td>
-              <button @click="editItem(item)" v-if="!item.editing && !dashboard" class="edit-button">Editar</button>
-              <button @click="saveItem(item)" v-if="item.editing" class="save-button">Salvar</button>
-              <button @click="cancelEdit(item)" v-if="item.editing" class="cancel-button">Cancelar</button>
+              <button @click="deleteItem(item)" class="cancel-button">Excluir</button>
             </td>
           </tr>
         </tbody>
@@ -151,6 +148,11 @@ export default defineComponent({
         });
     }
 
+    function deleteItem(sale: SaleModel) {
+      salesController.deleteSale(sale);
+      window.location.reload();
+    }
+
     function editItem(item: Item) {
       item.editing = true;
     }
@@ -171,6 +173,7 @@ export default defineComponent({
       salesController.postSale(novoSale.value);
       showModal.value = false;
       reloadTabela();
+      window.location.reload();
     }
 
     function fecharModal() {
@@ -188,7 +191,8 @@ export default defineComponent({
       registrarVenda,
       fecharModal,
       clients,
-      products
+      products,
+      deleteItem
     };
   },
   props: {

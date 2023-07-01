@@ -30,6 +30,14 @@ class SalesController {
             toastify.error('Erro ao atualizar venda')
         }
     }
+
+    async deleteSale(sale: SaleModel) {
+        try {
+            await apiService.delete<SaleModel>('sales', sale.codSale);
+        } catch (error) {
+            toastify.error('Erro ao deletar venda')
+        }
+    }
 };
 
 

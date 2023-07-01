@@ -26,6 +26,7 @@
                         </td>
                         <td>
                             <button class="add-button" v-if="!item.editing" @click="editItem(item)">Editar</button>
+                            <button class="cancel-button" v-if="!item.editing" @click="deleteItem(item)">Excluir</button>
                             <button class="save-button" @click="saveItem(item)" v-if="item.editing">Salvar</button>
                             <button @click="cancelEdit(item)" v-if="item.editing" class="cancel-button">Cancelar</button>
                         </td>
@@ -97,7 +98,7 @@ export default defineComponent({
                 })
                 .catch((error) => {
                     console.error('Erro ao obter os dados da API:', error);
-                }); 
+                });
         }
 
         function editItem(item: Item) {
@@ -113,6 +114,11 @@ export default defineComponent({
             item.editing = false;
             productController.updateProducts(item);
             reloadTabela();
+            window.location.reload();
+        }
+
+        function deleteItem(product: ProductModel) {
+            productController.deleteProduct(product);
             window.location.reload();
         }
 
@@ -139,7 +145,8 @@ export default defineComponent({
             novoProduct,
             registrarProduto,
             fecharModal,
-            cancelEdit
+            cancelEdit,
+            deleteItem
         };
     },
 });

@@ -18,8 +18,8 @@ export default {
     toastify.success('Atualizado com sucesso!');
     return response.data;
   },
-  async delete<T>(resource: string): Promise<T> {
-    const response: AxiosResponse<T> = await axios.delete(`${API_BASE_URL}/${resource}`);
+  async delete<T>(resource: string, id: number): Promise<T> {
+    const response: AxiosResponse<T> = await axios.delete(`${API_BASE_URL}/${resource}/${id}`);
     return response.data;
   }
 };

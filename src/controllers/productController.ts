@@ -30,6 +30,14 @@ class ProductsController {
             toastify.error('Erro ao atualizar produto')
         }
     }
+
+    async deleteProduct(product: ProductModel) {
+        try {
+            await apiService.delete<ProductModel>('products', product.codProd);
+        } catch (error) {
+            toastify.error('Erro ao deletar venda')
+        }
+    }
 };
 
 
