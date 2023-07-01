@@ -47,7 +47,7 @@
                             <label for="stock">Estoque:</label>
                             <input id="stock" v-model="novoProduct.stock" required />
                         </form>
-                        <button type="submit" class="add-row-button">Registrar</button>
+                        <button @click="registrarProduto" type="submit" class="add-row-button">Registrar</button>
                         <button @click="fecharModal" class="cancel-button">Fechar</button>
                     </div>
                 </div>
@@ -116,8 +116,8 @@ export default defineComponent({
 
         function registrarProduto() {
             productController.postProducts(novoProduct.value);
-            showModal.value = false;
             reloadTabela();
+            showModal.value = false;
         }
 
         function fecharModal() {

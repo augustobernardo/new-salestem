@@ -2,8 +2,11 @@
 import { useCard } from "../../store/cardStore";
 import ChartComponent from "./ChartComponent.vue"
 
+
 const cardStore = useCard();
-const cardData = cardStore.getCardData;
+debugger
+cardStore.getData;
+const cardData = cardStore.cardData;
 
 </script>
 
@@ -12,7 +15,7 @@ const cardData = cardStore.getCardData;
         <li v-for="(card, index) in cardData" :key="index">
             <ChartComponent :classChart="card.class" :percentage="card.percentage" />
             <span class="text">
-                <h3>{{ card.value }}</h3>
+                <h3>R$ {{ card.totalPrice }}</h3>
                 <p>{{ card.label }}</p>
             </span>
         </li>

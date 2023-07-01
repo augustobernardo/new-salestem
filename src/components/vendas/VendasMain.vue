@@ -70,7 +70,7 @@
             </div>
             <br>
             <div class="button-group">
-              <button type="submit" class="add-row-button">Registrar</button>
+              <button @click="registrarVenda" type="submit" class="add-row-button">Registrar</button>
               <button @click="fecharModal" class="cancel-button">Fechar</button>
             </div>
           </form>

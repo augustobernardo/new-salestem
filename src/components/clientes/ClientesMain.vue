@@ -57,7 +57,7 @@
                         <label for="cpf">CPF:</label>
                         <input id="cpf" v-model="novoCliente.cpf" required />
                     </form>
-                    <button type="submit" class="add-row-button">Registrar</button>
+                    <button type="submit" @click="registrarCliente" class="add-row-button">Registrar</button>
                     <button @click="fecharModal" class="cancel-button">Fechar</button>
                 </div>
             </div>
