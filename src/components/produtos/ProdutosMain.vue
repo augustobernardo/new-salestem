@@ -24,9 +24,10 @@
                         <td>
                             <input v-model="item.stock" :disabled="!item.editing" />
                         </td>
-                        <td class="add-button">
-                            <button @click="editItem(item)">Editar</button>
-                            <button @click="saveItem(item)" v-if="item.editing">Salvar</button>
+                        <td>
+                            <button class="add-button" v-if="!item.editing" @click="editItem(item)">Editar</button>
+                            <button class="save-button" @click="saveItem(item)" v-if="item.editing">Salvar</button>
+                            <button @click="cancelEdit(item)" v-if="item.editing" class="cancel-button">Cancelar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -124,6 +125,10 @@ export default defineComponent({
             showModal.value = false;
             reloadTabela();
         }
+        function cancelEdit(item: Item) {
+            item.editing = false;
+            reloadTabela();
+        }
 
         return {
             items,
@@ -132,7 +137,8 @@ export default defineComponent({
             showModal,
             novoProduct,
             registrarProduto,
-            fecharModal
+            fecharModal,
+            cancelEdit
         };
     },
 });

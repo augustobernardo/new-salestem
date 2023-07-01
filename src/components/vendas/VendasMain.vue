@@ -15,11 +15,11 @@
             <th>Quantidade</th>
             <th>Total</th>
             <th>Data da Venda</th>
-            <th>Edição</th>
+            <th v-if="!dashboard">Edição</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in items" :key="index" :class="{ 'row-editing': item.editing }">
+          <tr v-for="(item, index) in items" :key="index" >
             <td>
               <input v-model="item.client.name" :disabled="!item.editing" class="input-field" />
             </td>
@@ -36,7 +36,7 @@
               <input v-model="item.saleDate" :disabled="!item.editing" class="input-field" />
             </td>
             <td>
-              <button @click="editItem(item)" v-if="!item.editing" class="edit-button">Editar</button>
+              <button @click="editItem(item)" v-if="!item.editing && !dashboard" class="edit-button">Editar</button>
               <button @click="saveItem(item)" v-if="item.editing" class="save-button">Salvar</button>
               <button @click="cancelEdit(item)" v-if="item.editing" class="cancel-button">Cancelar</button>
             </td>

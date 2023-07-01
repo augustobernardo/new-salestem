@@ -33,7 +33,7 @@
                             <input v-model="item.cpf" :disabled="!item.editing" />
                         </td>
                         <td>
-                            <button @click="editItem(item)" class="edit-button">Editar</button>
+                            <button @click="editItem(item)" v-if="!item.editing" class="edit-button">Editar</button>
                             <button @click="saveItem(item)" v-if="item.editing" class="save-button">Salvar</button>
                             <button @click="cancelEdit(item)" v-if="item.editing" class="cancel-button">Cancelar</button>
                         </td>
