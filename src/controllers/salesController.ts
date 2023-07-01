@@ -1,29 +1,33 @@
-import saleModel from '../models/saleModel'
+import apiService from '../services/apiService';
+import SaleModel from '../models/saleModel'
+import { ToastifyClass } from '../utils/scripts/ToastifyClass';
+
+const toastify = new ToastifyClass();
 
 class SalesController {
-    async getClients() {
+    async getSales() {
         try {
-            const response = await apiService.get<SaleModel[]>('clients')
+            const response = await apiService.get<SaleModel[]>('sales')
             return response as SaleModel[];
         } catch (error) {
-            throw new Error('Erro ao buscar clientes');
+            throw new Error('Erro ao buscar venda');
         }
     }
 
-    async postUser(sale: SaleModel) {
+    async postSale(sale: SaleModel) {
         try {
-            await apiService.post<SaleModel>('clients', sale);
+            await apiService.post<SaleModel>('sales', sale);
         } catch (error) {
-            toastify.error('Erro ao adicionar cliente!')
+            toastify.error('Erro ao adicionar venda!')
             console.log(error);
         }
     }
 
-    async updateUser(sale: SaleModel) {
+    async updateSale(sale: SaleModel) {
         try {
-            await apiService.update<SaleModel>('sales', sale.codClient, sale);
+            await apiService.update<SaleModel>('sales', sale.codSale, sale);
         } catch (error) {
-            toastify.error('Erro ao atualizar usuário')
+            toastify.error('Erro ao atualizar venda')
         }
     }
 };

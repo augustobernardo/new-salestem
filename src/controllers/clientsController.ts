@@ -13,7 +13,7 @@ class ClientsController {
         }
     }
 
-    async postUser(client: ClientModel) {
+    async postClient(client: ClientModel) {
         try {
             await apiService.post<ClientModel>('clients', client);
         } catch (error) {
@@ -22,7 +22,7 @@ class ClientsController {
         }
     }
 
-    async updateUser(client: ClientModel) {
+    async updateClient(client: ClientModel) {
         try {
             await apiService.update<ClientModel>('clients', client.codClient, client);
         } catch (error) {

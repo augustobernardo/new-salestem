@@ -112,21 +112,23 @@ export default defineComponent({
         }
 
         function editItem(item: Item) {
-            item.editing = true;
+            if (item.editing) {
+                item.editing = false;
+            } else {
+                item.editing = true
+            }
         }
 
         function saveItem(item: Item) {
             reloadTabela();
             item.editing = false;
-            clientsController.updateUser(item);
+            clientsController.updateClient(item);
             reloadTabela();
         }
 
         function registrarCliente() {
-            reloadTabela();
-            clientsController.postUser(novoCliente.value);
+            clientsController.postClient(novoCliente.value);
             showModal.value = false;
-
             reloadTabela();
         }
 

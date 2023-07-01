@@ -1,5 +1,5 @@
 <template>
-   <main>
+  <main>
     <div class="head-title">
       <div class="left">
         <h1>Vendas</h1>
@@ -7,194 +7,140 @@
 
     </div>
 
-
-  <div class="table-data">
-    <div class="add-row">
-      <button @click="toggleAdicionarLinha" class="add-row-button">Adicionar Linha</button>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nome do Cliente</th>
+            <th>Nome do Produto</th>
+            <th>Quantidade</th>
+            <th>Total Price</th>
+            <th>Data da Venda</th>
+            <th>Edição</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in items" :key="index">
+            <td>
+              <input v-model="item.client.name" :disabled="!item.editing" />
+            </td>
+            <td>
+              <input v-model="item.products[0].nameProd" :disabled="!item.editing" />
+            </td>
+            <td>
+              <input v-model="item.products[0].amount" :disabled="!item.editing" />
+            </td>
+            <td>
+              <input v-model="item.totalPrice" :disabled="!item.editing" />
+            </td>
+            <td>
+              <input v-model="item.saleDate" :disabled="!item.editing" />
+            </td>
+            <td>
+              <button @click="editItem(item)">Editar</button>
+              <button @click="saveItem(item)" v-if="item.editing">Salvar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th v-for="(column, index) in columns" :key="index">{{ column }}</th>
-          <th>Ações</th>
-        </tr>
-        <tr v-if="adicionarLinhaVisivel">
-          <td v-for="(column, index) in columns" :key="index">
-            <input v-model="novoItem[column]" class="input-field" />
-          </td>
-          <td>
-            <button @click="adicionarLinha" class="add-button">Adicionar</button>
-            <button @click="cancelarLinha" class="remove-button">Cancelar</button>
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in displayedItems" :key="item.id" :class="{ 'row-editing': item.editavel }">
-          <td v-for="(column, colIndex) in columns" :key="colIndex">
-            <input v-model="item[column]" :disabled="!item.editavel" class="input-field" />
-          </td>
-          <td>
-            <template v-if="!item.editavel">
-              <button @click="editarItem(index)" class="edit-button">Editar</button>
-              <button @click="removerItem(item)" class="remove-button">Remover</button>
-            </template>
-            <template v-else>
-              <button @click="salvarItem(item)" class="save-button">Salvar</button>
-              <button @click="cancelarEdicao(item)" class="cancel-button">Cancelar</button>
-            </template>
-          </td>
-        </tr>
-      </tbody>
-    </table>
 
-    <div class="pagination">
-      <button @click="previousPage" :disabled="currentPage === 1">Anterior</button>
-      <span>Página {{ currentPage }} de {{ totalPages }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages">Próxima</button>
+    <div>
+      <button @click="showModal = true">Registrar Nova Venda</button>
+      <div v-if="showModal" class="modal">
+        <!-- Modal content for registering new sale -->
+      </div>
     </div>
-  </div>
-</main>
+  </main>
 </template>
   
 <script lang="ts">
-import { defineComponent } from 'vue';
- // Importar o arquivo JSON com os dados
+import { defineComponent, ref, onMounted } from "vue";
+import SaleModel from "../../models/saleModel";
+import SalesController from "../../controllers/salesController";
+
+interface Item {
+  client: { name: string };
+  products: { nameProd: string; amount: number }[];
+  totalPrice: number;
+  saleDate: string;
+  editing: boolean;
+}
+
+const salesController = new SalesController();
 
 export default defineComponent({
-  data() {
+  name: "DataTable",
+  setup() {
+    const items = ref<Item[]>([]);
+    const showModal = ref(false);
+    const novoSale = ref<SaleModel>({
+      codSale: 0,
+      totalPrice: 0,
+      saleDate: "",
+      client: { codClient: 0, name: "", phone: "", email: "", cpf: "" },
+      products: [{ codProd: 0, nameProd: "", price: 0, stock: 0, amount: 0 }],
+    });
+
+    onMounted(() => {
+      reloadTabela();
+    });
+
+    function reloadTabela() {
+      salesController
+        .getSales()
+        .then((sales) => sales)
+        .then((data) => {
+          items.value = data;
+        })
+        .catch((error) => {
+          console.error("Erro ao obter os dados da API:", error);
+        });
+    }
+
+    function editItem(item: Item) {
+      if (item.editing) {
+        item.editing = false;
+      } else {
+        item.editing = true;
+      }
+    }
+
+    function saveItem(item: Item) {
+      item.editing = false;
+      salesController.updateSale(item);
+      reloadTabela();
+    }
+
+    function registrarVenda() {
+      salesController.postSale(novoSale.value);
+      showModal.value = false;
+      reloadTabela();
+    }
+
+    function fecharModal() {
+      showModal.value = false;
+      reloadTabela();
+    }
+
     return {
-      items: [],
-      itemsPerPage: 5,
-      currentPage: 1,
-      adicionarLinhaVisivel: false,
-      novoItem: {},
-      columns: [],
-      linhasEmEdicao: [],
+      items,
+      showModal,
+      novoSale,
+      editItem,
+      saveItem,
+      registrarVenda,
+      fecharModal,
     };
-  },
-  computed: {
-    displayedItems() {
-      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-      const endIndex = startIndex + this.itemsPerPage;
-      return this.items.slice(startIndex, endIndex);
-    },
-    totalPages() {
-      return Math.ceil(this.items.length / this.itemsPerPage);
-    },
-  },
-  created() {
-
-    
-
-    const dadosLocalStorage = localStorage.getItem('tabelaDadosVendas');
-    if (dadosLocalStorage) {
-      this.items = JSON.parse(dadosLocalStorage);
-    } else {
-      this.items = jsonData;
-      this.salvarLocalStorage();
-    }
-
-    if (this.items.length > 0) {
-      this.columns = Object.keys(this.items[0]).filter((column) => column !== 'id' && column !== 'editavel' && column !== 'copia');
-    }
-  },
-  methods: {
-    salvarLocalStorage() {
-      localStorage.setItem('tabelaDadosVendas', JSON.stringify(this.items));
-    },
-    editarItem(index: number) {
-      const realIndex = (this.currentPage - 1) * this.itemsPerPage + index;
-      this.items[realIndex].editavel = true;
-      this.linhasEmEdicao.push(this.items[realIndex]); // Armazena o objeto da linha em edição
-    },
-    removerItem(item) {
-      const index = this.items.indexOf(item);
-      this.items.splice(index, 1);
-      this.salvarLocalStorage();
-
-      const linhasEmEdicaoSalvas = [...this.linhasEmEdicao]; // Faz uma cópia do array linhasEmEdicao
-      this.linhasEmEdicao = []; // Limpa o array linhasEmEdicao
-
-      this.items.forEach((linha) => {
-        linha.editavel = false; // Desabilita a edição em todas as linhas
-      });
-      this.salvarLocalStorage();
-
-      const index2 = linhasEmEdicaoSalvas.findIndex((linha) => linha === item);
-      if (index2 !== -1) {
-        linhasEmEdicaoSalvas.splice(index2, 1); // Remove a linha clicada da array linhasEmEdicaoSalvas
-      }
-
-      linhasEmEdicaoSalvas.forEach((linha) => {
-        linha.editavel = true; // Habilita a edição novamente apenas nas linhas salvas
-      });
-
-    },
-    salvarItem(item: any) {
-      const linhasEmEdicaoSalvas = [...this.linhasEmEdicao]; // Faz uma cópia do array linhasEmEdicao
-      this.linhasEmEdicao = []; // Limpa o array linhasEmEdicao
-
-      this.items.forEach((linha) => {
-        linha.editavel = false; // Desabilita a edição em todas as linhas
-      });
-      this.salvarLocalStorage();
-
-      const index = linhasEmEdicaoSalvas.findIndex((linha) => linha === item);
-      if (index !== -1) {
-        linhasEmEdicaoSalvas.splice(index, 1); // Remove a linha clicada da array linhasEmEdicaoSalvas
-      }
-
-      linhasEmEdicaoSalvas.forEach((linha) => {
-        linha.editavel = true; // Habilita a edição novamente apenas nas linhas salvas
-      });
-
-    },
-    cancelarEdicao(item) {
-        const index = this.items.indexOf(item);
-        // const realIndex = (this.currentPage - 1) * this.itemsPerPage + index;
-        
-        const tabelaDadosVendas = JSON.parse(localStorage.getItem('tabelaDadosVendas'));
-        if (index !== -1) {
-              const linhaOriginal = tabelaDadosVendas[index];
-    if (linhaOriginal) {
-      // Restaurar os valores originais da linha
-      this.items[index] = { ...linhaOriginal };
-      this.items[index].editavel = false;
-      this.linhasOriginais = this.linhasOriginais.filter((linha) => linha.id !== item.id);
-    }
-  }
-},
-    previousPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-      }
-    },
-    nextPage() {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-      }
-    },
-    toggleAdicionarLinha() {
-      this.adicionarLinhaVisivel = !this.adicionarLinhaVisivel;
-    },
-    adicionarLinha() {
-      const id = this.items.length + 1;
-      const novoItem = { ...this.novoItem, id, editavel: false };
-      this.items.push(novoItem);
-      this.novoItem = this.columns.reduce((acc, column) => {
-        acc[column] = '';
-        return acc;
-      }, {});
-      this.adicionarLinhaVisivel = false;
-      this.salvarLocalStorage();
-    },
-    cancelarLinha() {
-      this.adicionarLinhaVisivel = false;
-    },
   },
 });
 </script>
   
+
+
+
+
+
 <style scoped>
 .table {
   width: 100%;
