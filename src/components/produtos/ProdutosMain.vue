@@ -6,7 +6,7 @@
             </div>
             <table>
                 <thead>
-                    <tr>
+                    <tr class="tableTitle">
                         <th>Nome</th>
                         <th>Preço</th>
                         <th>Estoque</th>
@@ -24,7 +24,7 @@
                         <td>
                             <input v-model="item.stock" :disabled="!item.editing" />
                         </td>
-                        <td>
+                        <td class="add-button">
                             <button @click="editItem(item)">Editar</button>
                             <button @click="saveItem(item)" v-if="item.editing">Salvar</button>
                         </td>
@@ -33,13 +33,9 @@
             </table>
         </div>
 
-
         <div>
-
-
-
             <div>
-                <button @click="showModal = true">Registrar Novo Produto</button>
+                <button @click="showModal = true" class="add-button">Registrar Novo Produto</button>
                 <div v-if="showModal" class="modal">
                     <div class="modal-content">
                         <h2>Registrar Novo Produto</h2>
@@ -50,13 +46,12 @@
                             <input id="price" v-model="novoProduct.price" required />
                             <label for="stock">Estoque:</label>
                             <input id="stock" v-model="novoProduct.stock" required />
-                            <button type="submit">Registrar</button>
                         </form>
-                        <button @click="fecharModal">Fechar</button>
+                        <button type="submit" class="add-row-button">Registrar</button>
+                        <button @click="fecharModal" class="cancel-button">Fechar</button>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 </template>
@@ -143,100 +138,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 16px;
-}
-
-th,
-td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 8px;
-    border: 1px solid #ccc;
-}
-
-@media (max-width: 768px) {
-    table {
-        font-size: 14px;
-    }
-
-    th,
-    td {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-}
-
-button {
-    padding: 4px 8px;
-    margin: 4px;
-}
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 4px;
-    width: 400px;
-}
-
-h2 {
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input {
-    width: 100%;
-    padding: 8px;
-    font-size: 14px;
-}
-
-.button-group {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-}
-
-button {
-    margin-left: 10px;
-    padding: 8px 16px;
-    font-size: 14px;
-}
-
-button:first-child {
-    margin-left: 0;
-}
-</style>
+<style scoped src="../../styles/tables.css"/>

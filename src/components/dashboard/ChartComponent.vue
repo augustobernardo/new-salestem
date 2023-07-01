@@ -39,7 +39,6 @@ onMounted(() => {
                 track: {
                     background: "var(--chart-bg)",
                     strokeWidth: '100%',
-                    // margin: 16, // margin is in pixels
                 },
                 dataLabels: {
                     showOn: "always",

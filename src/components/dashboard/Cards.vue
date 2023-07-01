@@ -3,9 +3,8 @@ import { useCard } from "../../store/cardStore";
 import ChartComponent from "./ChartComponent.vue"
 
 const cardStore = useCard();
-const cardData = cardStore.cardData;
+const cardData = cardStore.getCardData;
 
-// localStorage.setItem("cardData", JSON.stringify(cardData));
 </script>
 
 <template>
