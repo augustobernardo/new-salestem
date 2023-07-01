@@ -13,7 +13,10 @@ interface Item {
 
 const salesController = new SalesController();
 const items = ref<Item[]>([]);
-const limit = 10000;
+const limitDay = 1000;
+const limitMonth = 7000;
+const limitYear = 365000;
+
 
 interface CardData {
   totalPrice: string,
@@ -28,23 +31,26 @@ export const useCard = defineStore("card", () => {
       totalPrice: "0",
       label: "Vendas de hoje",
       class: "chart3",
-      percentage: "0.00",
+      percentage: "0",
     },
     {
       totalPrice: "0",
       label: "Vendas da última semana",
       class: "chart",
-      percentage: "0.00",
+      percentage: "0",
     },
     {
       totalPrice: "0",
       label: "Vendas do último mês",
       class: "chart2",
-      percentage: "0.00",
+      percentage: "0",
     },
   ]);
 
   let totalPriceToday = 0;
+  let totalPriceMonth = 0;
+  let totalPriceYear = 0;
+
 
   async function getData() {
     try {
@@ -73,11 +79,28 @@ export const useCard = defineStore("card", () => {
         if (dateSale === currentDate) {
           totalPriceToday += sale.totalPrice;
         }
+
+        if (month === currentMonth) {
+          totalPriceMonth += sale.totalPrice;
+        }
+
+        if (year === currentYear) {
+          totalPriceYear += sale.totalPrice;
+        }
       })
 
-      const percentageToday = ((totalPriceToday / limit) * 100).toFixed(2);
-      cardData.value[0].totalPrice = totalPriceToday.toFixed(2);
-      cardData.value[0].percentage = percentageToday;
+      const percentageToday = ((totalPriceToday / limitDay) * 100);
+      const percentageMonth = ((totalPriceMonth / limitMonth) * 100);
+      const percentageYear = ((totalPriceYear / limitYear) * 100);
+      cardData.value[0].totalPrice = totalPriceToday.toString();
+      cardData.value[0].percentage = percentageToday.toString();
+
+      cardData.value[1].totalPrice = totalPriceMonth.toString();
+      cardData.value[1].percentage = percentageMonth.toFixed(0).toString();
+
+      cardData.value[2].totalPrice = totalPriceYear.toString();
+      cardData.value[2].percentage = percentageYear.toFixed(0).toString();
+
 
     } catch (error) {
       console.error("Erro ao obter os dados da API:", error);

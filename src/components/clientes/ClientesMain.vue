@@ -122,6 +122,7 @@ export default defineComponent({
             item.editing = false;
             clientsController.updateClient(item);
             reloadTabela();
+            window.location.reload();
         }
 
         function cancelEdit(item: Item) {

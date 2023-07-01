@@ -97,7 +97,7 @@ export default defineComponent({
                 })
                 .catch((error) => {
                     console.error('Erro ao obter os dados da API:', error);
-                });
+                }); 
         }
 
         function editItem(item: Item) {
@@ -113,6 +113,7 @@ export default defineComponent({
             item.editing = false;
             productController.updateProducts(item);
             reloadTabela();
+            window.location.reload();
         }
 
         function registrarProduto() {

@@ -159,6 +159,7 @@ export default defineComponent({
       item.editing = false;
       salesController.updateSale(item);
       reloadTabela();
+      window.location.reload();
     }
 
     function cancelEdit(item: Item) {
