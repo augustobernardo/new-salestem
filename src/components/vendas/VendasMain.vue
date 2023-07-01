@@ -30,8 +30,7 @@
               <input v-model="item.amount" :disabled="!item.editing" class="input-field" />
             </td>
             <td>
-              <input :value={resultTotal(index)}
-                :disabled="!item.editing" class="input-field" />
+              <input v-model="item.totalPrice" :disabled="!item.editing" class="input-field" />
             </td>
             <td>
               <input v-model="item.saleDate" :disabled="!item.editing" class="input-field" />
@@ -47,33 +46,38 @@
     </div>
 
     <div>
-      <button @click="showModal = true" class="add-button">Registrar Nova Venda</button>
-      <div v-if="showModal" class="modal">
-        <div class="modal-content">
-          <h2>Registrar Nova Venda</h2>
-          <form @submit.prevent="registrarVenda">
-            <div class="form-group">
-              <label for="cliente">Cliente:</label>
-              <select id="cliente" v-model="novoSale.client" required class="input-field">
-                <option v-for="client in clients" :key="client.codClient" :value="client">{{ client.name }}</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="totalPrice">Total Price:</label>
-              <input id="totalPrice" v-model="novoSale.totalPrice" type="number" required class="input-field" />
-            </div>
-            <div class="form-group">
-              <label for="saleDate">Data da Venda:</label>
-              <input id="saleDate" v-model="novoSale.saleDate" type="date" required class="input-field" />
-            </div>
-            <div class="button-group">
-              <button type="submit" class="add-row-button">Registrar</button>
-              <button @click="fecharModal" class="cancel-button">Fechar</button>
-            </div>
-          </form>
+  <button @click="showModal = true" class="add-button">Registrar Nova Venda</button>
+  <div v-if="showModal" class="modal">
+    <div class="modal-content">
+      <h2>Registrar Nova Venda</h2>
+      <form @submit.prevent="registrarVenda">
+        <div class="form-group">
+          <label for="cliente">Cliente:</label>
+          <select id="cliente" v-model="novoSale.client" required class="input-field">
+            <option v-for="client in clients" :key="client.codClient" :value="client">{{ client.name }}</option>
+          </select>
         </div>
-      </div>
+        <div class="form-group">
+          <label for="produto">Produto:</label>
+          <select id="produto" v-model="novoSale.product" required class="input-field">
+            <option v-for="product in products" :key="product.codProd" :value="product">{{ product.nameProd }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="saleDate">Quantidade:</label>
+          <input id="saleDate" v-model="novoSale.amount" type="number" required class="input-field" />
+        </div>
+        <br>
+        <div class="button-group">
+          <button type="submit" class="add-row-button">Registrar</button>
+          <button @click="fecharModal" class="cancel-button">Fechar</button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
+
+
   </main>
 </template>
 
@@ -83,6 +87,8 @@ import SaleModel from "../../models/saleModel";
 import SalesController from "../../controllers/salesController";
 import ClientModel from "../../models/clientModel";
 import ProductModel from "../../models/productModel";
+import ProductsController from "../../controllers/productController";
+import ClientsController from "../../controllers/clientsController";
 
 interface Item {
   client: { name: string };
@@ -92,13 +98,9 @@ interface Item {
   editing: boolean;
 }
 
-
-
+const clientsController = new ClientsController();
+const productController = new ProductsController();
 const salesController = new SalesController();
-
-const resultTotal = (index: number) => {
-  return index
-}
 
 export default defineComponent({
   name: "DataTable",
@@ -113,18 +115,12 @@ export default defineComponent({
       client: { codClient: 0, name: "", phone: "", email: "", cpf: "" },
       product: { codProd: 0, nameProd: "", price: 0, stock: 0, amount: 0 },
     });
-    const clients = ref<ClientModel[]>([]); // Add clients data
-    const products = ref<ProductModel[]>([]); // Add products data
+    const clients = ref<ClientModel[]>([]); 
+    const products = ref<ProductModel[]>([]);
 
     onMounted(() => {
       reloadTabela();
     });
-
-    let total = 0
-
-    function getTotalPrice(amount: number, price: number) {
-      total = amount * price
-    }
 
     function reloadTabela() {
       salesController
@@ -132,7 +128,24 @@ export default defineComponent({
         .then((sales) => sales)
         .then((data) => {
           items.value = data;
-          console.log(data)
+        })
+        .catch((error) => {
+          console.error("Erro ao obter os dados da API:", error);
+        });
+
+      clientsController.getClients()
+        .then((clients) => clients)
+        .then((data) => {
+          clients.value = data;
+        })
+        .catch((error) => {
+          console.error("Erro ao obter os dados da API:", error);
+        });
+        
+        productController.getProducts()
+        .then((clients) => clients)
+        .then((data) => {
+          products.value = data;
         })
         .catch((error) => {
           console.error("Erro ao obter os dados da API:", error);
@@ -175,8 +188,7 @@ export default defineComponent({
       registrarVenda,
       fecharModal,
       clients,
-      products,
-      getTotalPrice
+      products
     };
   },
 });
@@ -206,6 +218,12 @@ td {
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 
 .edit-button,
