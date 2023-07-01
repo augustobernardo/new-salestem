@@ -2,10 +2,8 @@
 import { useCard } from "../../store/cardStore";
 import ChartComponent from "./ChartComponent.vue"
 
-
-const cardStore = useCard();
 debugger
-cardStore.getData;
+const cardStore = useCard();
 const cardData = cardStore.cardData;
 
 </script>
