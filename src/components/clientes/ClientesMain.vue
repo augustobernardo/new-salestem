@@ -134,6 +134,7 @@ export default defineComponent({
             clientsController.postClient(novoCliente.value);
             showModal.value = false;
             reloadTabela();
+            window.location.reload();
         }
 
         function fecharModal() {

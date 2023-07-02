@@ -126,6 +126,7 @@ export default defineComponent({
             productController.postProducts(novoProduct.value);
             reloadTabela();
             showModal.value = false;
+            window.location.reload();
         }
 
         function fecharModal() {
